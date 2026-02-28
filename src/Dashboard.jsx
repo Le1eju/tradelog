@@ -14,7 +14,7 @@ export default function Dashboard({ trades, initialBalance }) {
   const fmt = (n, d = 2) => Number(n).toFixed(d);
   const fmtEur = (n) => {
     const sign = Number(n) >= 0 ? "+" : "";
-    return `${sign}€${fmt(Math.abs(n))}`;
+    return `${sign}$${fmt(Math.abs(n))}`;
   };
 
   return (
@@ -51,8 +51,8 @@ export default function Dashboard({ trades, initialBalance }) {
         <StatCard label="Avg RRR" value={fmt(stats.avgRrr)} sub="reward/risk" />
         <StatCard
           label="Balance"
-          value={`€${fmt(balance)}`}
-          sub={`Initial: €${fmt(initialBalance)}`}
+          value={`$${fmt(balance)}`}
+          sub={`Initial: $${fmt(initialBalance)}`}
           positive={balance >= initialBalance}
         />
       </div>
@@ -144,7 +144,7 @@ export default function Dashboard({ trades, initialBalance }) {
                     color: Number(t.pnl) >= 0 ? C.green : C.red,
                   }}
                 >
-                  {Number(t.pnl) >= 0 ? "+" : ""}€
+                  {Number(t.pnl) >= 0 ? "+" : ""}$
                   {Math.abs(Number(t.pnl)).toFixed(2)}
                 </div>
               </div>

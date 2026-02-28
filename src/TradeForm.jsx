@@ -335,7 +335,7 @@ export default function TradeForm({
             onChange={(e) => handleRiskPct(e.target.value)}
           />
         </Field>
-        <Field label="Risk Amount (€)">
+        <Field label="Risk Amount ($)">
           <Input
             type="number"
             step="0.01"
