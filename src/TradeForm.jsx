@@ -81,6 +81,7 @@ export default function TradeForm({
   initial = {},
   currentBalance,
   allTrades,
+  initialDate,
 }) {
   const instruments = [
     ...new Set(allTrades.map((t) => t.instrument).filter(Boolean)),
@@ -107,7 +108,7 @@ export default function TradeForm({
     lots: "0.01",
     riskPct: "",
     riskAmount: "",
-    entryDate: localNow,
+    entryDate: initialDate || localNow,
     exitDate: "",
     pnl: "",
     notes: "",
