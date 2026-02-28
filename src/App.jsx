@@ -126,7 +126,37 @@ export default function App() {
             Trading Journal
           </div>
         </div>
-
+        <div
+          style={{
+            margin: "16px 16px 8px",
+            padding: "10px 14px",
+            background: C.surface2,
+            borderRadius: 8,
+            border: `1px solid ${C.border}`,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 10,
+              color: C.muted,
+              fontFamily: C.mono,
+              letterSpacing: "0.1em",
+              marginBottom: 4,
+            }}
+          >
+            BALANCE
+          </div>
+          <div
+            style={{
+              fontFamily: C.mono,
+              fontSize: 15,
+              fontWeight: 700,
+              color: C.green,
+            }}
+          >
+            ${currentBalance.toFixed(2)}
+          </div>
+        </div>
         <div style={{ marginTop: 16, flex: 1 }}>
           {NAV_ITEMS.map((item) => (
             <button
@@ -149,6 +179,17 @@ export default function App() {
               {item.label}
             </button>
           ))}
+        </div>
+        <div
+          style={{
+            padding: "16px 20px",
+            borderTop: `1px solid ${C.border}`,
+            fontSize: 10,
+            color: C.muted,
+            fontFamily: C.mono,
+          }}
+        >
+          {data.trades.length} TRADES LOGGED
         </div>
       </nav>
 
