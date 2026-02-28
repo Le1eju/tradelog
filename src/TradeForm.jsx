@@ -25,7 +25,7 @@ function Input({ style = {}, ...props }) {
   );
 }
 
-function FormSelect({ children, style = {}, ...props }) { 
+function FormSelect({ children, style = {}, ...props }) {
   return (
     <select
       style={{
@@ -133,6 +133,13 @@ export default function TradeForm({
     set("riskPct", value);
     if (value && currentBalance) {
       set("riskAmount", ((Number(value) / 100) * currentBalance).toFixed(2));
+    }
+  };
+
+  const handleRiskAmt = (value) => {
+    set("riskAmount", value);
+    if (value && currentBalance) {
+      set("riskPct", ((Number(value) / currentBalance) * 100).toFixed(2));
     }
   };
   const handleSubmit = () => {
@@ -376,7 +383,7 @@ export default function TradeForm({
         </Field>
       </Row>
 
-      <div style={{ marginBottom: 14 }}> 
+      <div style={{ marginBottom: 14 }}>
         <Label>Notes (optional)</Label>
         <textarea
           value={form.notes}
