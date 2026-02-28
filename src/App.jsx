@@ -1,4 +1,8 @@
 import { useState } from "react";
+import Dashboard from "./Dashboard";
+import Journal from "./Journal";
+import History from "./History";
+import Settings from "./Settings";
 
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
@@ -141,7 +145,13 @@ export default function App() {
           padding: "28px 32px",
         }}
       >
-        <p style={{ color: C.muted }}>Current page: {page}</p>
+        <p style={{ color: C.muted }}>
+          Current page:
+          {page === "dashboard" && <Dashboard />}
+          {page === "journal" && <Journal />}
+          {page === "history" && <History />}
+          {page === "settings" && <Settings />}
+        </p>
       </main>
     </div>
   );
