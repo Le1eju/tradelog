@@ -1,4 +1,4 @@
-import { C } from './constants.js'
+import { C } from "./constants.js";
 
 export function Card({ children, style = {} }) {
   return (
@@ -54,14 +54,14 @@ export function StatCard({ label, value, sub, positive }) {
   );
 }
 
-export function Badge({ children, color }) {
+export function Badge({ children, color }) { 
   return (
     <span
       style={{
         display: "inline-block",
         padding: "2px 10px",
         borderRadius: 20,
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: 600,
         fontFamily: C.mono,
         background: color === "green" ? "#14532d33" : "#450a0a33",
@@ -71,5 +71,43 @@ export function Badge({ children, color }) {
     >
       {children}
     </span>
+  );
+}
+
+export function Modal({ open, onClose, children }) {
+  if (!open) return null;
+  return (
+    <div
+      onClick={onClose} // close when clicking outside
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "#00000099",
+        zIndex: 1000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 20,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="fade-in"
+        style={{
+          background: C.surface,
+          border: `1px solid ${C.border2}`,
+          borderRadius: 14,
+          padding: 28,
+          width: "100%",
+          maxWidth: 560,
+          maxHeight: "90vh",
+          overflowY: "auto",
+          marginTop: "auto",
+          marginBottom: "auto",
+        }}
+      >
+        {children}
+      </div>
+    </div>
   );
 }

@@ -1,28 +1,28 @@
-import { calcStats } from './stats.js'
-import { C } from './constants.js'
-import { Card, Label, StatCard } from './components.jsx'
+import { calcStats } from "./stats.js";
+import { C } from "./constants.js";
+import { Card, Label, StatCard } from "./components.jsx";
 
 export default function Dashboard({ trades, initialBalance }) {
-  const stats = calcStats(trades)
+  const stats = calcStats(trades);
 
-  const balance = initialBalance + stats.totalPnl
+  const balance = initialBalance + stats.totalPnl;
 
   const openTrades = trades.filter(
-    (t) => t.pnl === '' || t.pnl === null || t.pnl === undefined
-  )
+    (t) => t.pnl === "" || t.pnl === null || t.pnl === undefined,
+  );
 
-  const fmt = (n, d = 2) => Number(n).toFixed(d)
+  const fmt = (n, d = 2) => Number(n).toFixed(d);
   const fmtEur = (n) => {
-    const sign = Number(n) >= 0 ? '+' : ''
-    return `${sign}€${fmt(Math.abs(n))}`
-  }
+    const sign = Number(n) >= 0 ? "+" : "";
+    return `${sign}€${fmt(Math.abs(n))}`;
+  };
 
   return (
     <div className="fade-in">
       <h1
         style={{
           fontSize: 18,
-          letterSpacing: '0.1em',
+          letterSpacing: "0.1em",
           marginBottom: 24,
         }}
       >
@@ -31,9 +31,9 @@ export default function Dashboard({ trades, initialBalance }) {
 
       <div
         style={{
-          display: 'flex',
+          display: "flex",
           gap: 14,
-          flexWrap: 'wrap',
+          flexWrap: "wrap",
           marginBottom: 20,
         }}
       >
@@ -48,11 +48,7 @@ export default function Dashboard({ trades, initialBalance }) {
           sub={`${stats.wins}W · ${stats.losses}L`}
           positive={stats.winrate >= 50}
         />
-        <StatCard
-          label="Avg RRR"
-          value={fmt(stats.avgRrr)}
-          sub="reward/risk"
-        />
+        <StatCard label="Avg RRR" value={fmt(stats.avgRrr)} sub="reward/risk" />
         <StatCard
           label="Balance"
           value={`€${fmt(balance)}`}
@@ -69,10 +65,10 @@ export default function Dashboard({ trades, initialBalance }) {
               <div
                 key={t.id}
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '10px 0',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "10px 0",
                   borderBottom: `1px solid ${C.border}`,
                 }}
               >
@@ -98,7 +94,7 @@ export default function Dashboard({ trades, initialBalance }) {
                     background: `${C.accent}18`,
                     border: `1px solid ${C.accent}44`,
                     borderRadius: 20,
-                    padding: '3px 10px',
+                    padding: "3px 10px",
                   }}
                 >
                   OPEN
@@ -113,16 +109,16 @@ export default function Dashboard({ trades, initialBalance }) {
         <Label>Recent Closed Trades</Label>
         <div style={{ marginTop: 10 }}>
           {trades
-            .filter((t) => t.pnl !== '' && t.pnl !== null)
+            .filter((t) => t.pnl !== "" && t.pnl !== null)
             .slice(0, 5)
             .map((t) => (
               <div
                 key={t.id}
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '10px 0',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "10px 0",
                   borderBottom: `1px solid ${C.border}`,
                 }}
               >
@@ -145,17 +141,16 @@ export default function Dashboard({ trades, initialBalance }) {
                     fontFamily: C.mono,
                     fontWeight: 700,
                     fontSize: 13,
-                    color:
-                      Number(t.pnl) >= 0 ? C.green : C.red,
+                    color: Number(t.pnl) >= 0 ? C.green : C.red,
                   }}
                 >
-                  {Number(t.pnl) >= 0 ? '+' : ''}€
+                  {Number(t.pnl) >= 0 ? "+" : ""}€
                   {Math.abs(Number(t.pnl)).toFixed(2)}
                 </div>
               </div>
             ))}
-          {trades.filter((t) => t.pnl !== '' && t.pnl !== null)
-            .length === 0 && (
+          {trades.filter((t) => t.pnl !== "" && t.pnl !== null).length ===
+            0 && (
             <div style={{ color: C.muted, fontSize: 13 }}>
               No closed trades yet
             </div>
@@ -163,5 +158,5 @@ export default function Dashboard({ trades, initialBalance }) {
         </div>
       </Card>
     </div>
-  )
+  );
 }
