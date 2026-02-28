@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { C } from "./constants.js";
+import { loadData, saveData } from "./storage.js";
 import Dashboard from "./Dashboard";
 import Journal from "./Journal";
 import History from "./History";
 import Settings from "./Settings";
-import { C } from './constants.js'
 
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
@@ -50,6 +51,33 @@ const NAV_ITEMS = [
 
 export default function App() {
   const [page, setPage] = useState("dashboard");
+  const [data, setData] = useState(() => loadData());
+
+  const currentBalance =
+    data.initialBalance +
+    data.trades
+      .filter((t) => t.pnl !== "" && t.pnl !== null)
+      .reduce((sum, t) => sum + Number(t.pnl), 0);
+
+  const persist = (next) => {
+    setData(next);
+    saveData(next);
+  };
+
+  const addTrade = (trade) =>
+    persist({ ...data, trades: [trade, ...data.trades] });
+
+  const editTrade = (trade) =>
+    persist({
+      ...data,
+      trades: data.trades.map((t) => (t.id === trade.id ? trade : t)),
+    });
+
+  const deleteTrade = (id) =>
+    persist({
+      ...data,
+      trades: data.trades.filter((t) => t.id !== id),
+    });
 
   return (
     <div
@@ -133,10 +161,36 @@ export default function App() {
       >
         <p style={{ color: C.muted }}>
           Current page:
-          {page === "dashboard" && <Dashboard />}
-          {page === "journal" && <Journal />}
-          {page === "history" && <History />}
-          {page === "settings" && <Settings />}
+          {page === "dashboard" && (
+            <Dashboard
+              trades={data.trades}
+              initialBalance={data.initialBalance}
+            />
+          )}
+          {page === "journal" && (
+            <Journal
+              trades={data.trades}
+              onAdd={addTrade}
+              onEdit={editTrade}
+              onDelete={deleteTrade}
+              currentBalance={currentBalance}
+            />
+          )}
+          {page === "history" && (
+            <History
+              trades={data.trades}
+              onAdd={addTrade}
+              onEdit={editTrade}
+              onDelete={deleteTrade}
+              currentBalance={currentBalance}
+            />
+          )}
+          {page === "settings" && (
+            <Settings
+              initialBalance={data.initialBalance}
+              onSave={(val) => persist({ ...data, initialBalance: val })}
+            />
+          )}
         </p>
       </main>
     </div>
