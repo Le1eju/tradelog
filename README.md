@@ -1,16 +1,42 @@
-# React + Vite
+# TradeLog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal trading journal web application for tracking forex and financial market positions.
+Built with React + Vite as a university project for the Web Technologies course.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[tradelog-rose.vercel.app](https://tradelog-rose.vercel.app)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Dashboard** — account stats: Total P&L, Win Rate, Avg RRR, current balance
+- **Trading Journal** — monthly calendar view with color-coded winning/losing days
+- **Trade History** — full trade log with open/closed position separation and per-trade RRR
+- **Settings** — configure your initial account balance
+- Add, edit and delete trades with a full-featured form
+- Automatic risk % ↔ risk amount calculation based on current balance
+- Data persisted locally via localStorage — no backend required
+- Click any calendar day to add a trade with that date pre-filled
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 18
+- Vite 5
+- JavaScript (ES2022+)
+- localStorage (client-side data persistence)
+- Google Fonts (Space Mono + DM Sans)
+- Deployed on Vercel
+
+## Local Setup
+```bash
+git clone https://github.com/Le1eju/tradelog.git
+cd tradelog
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+## Build
+```bash
+npm run build
